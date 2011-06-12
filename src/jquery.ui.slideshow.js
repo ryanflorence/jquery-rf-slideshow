@@ -15,7 +15,7 @@ jQuery.widget('ui.slideshow', {
 	_init: function(){
 		var el = this.subject = jQuery( this.element );
 		if ( this.options.autoStyle ){
-			if ( el.css('position') == 'static' ) el.css( 'position', 'relative' );
+			if ( el.css('position') === 'static' ) el.css( 'position', 'relative' );
 			el.css( 'overflow', 'hidden' );
 		}
 		this.transitioning = false;
@@ -32,8 +32,8 @@ jQuery.widget('ui.slideshow', {
 	},
 
 	show: function( what, options ){
-		var index = ( typeof what == 'number' ) ? what : this['_' + what]();
-		if ( this.transitioning || this.current == index ) return;
+		var index = ( typeof what === 'number' ) ? what : this['_' + what]();
+		if ( this.transitioning || this.current === index ) return;
 
 		var opts = jQuery.extend( {}, options, this.options ),
 			trans = this._parseTransition( opts.transition ),
@@ -99,7 +99,7 @@ jQuery.widget('ui.slideshow', {
 	},
 
 	_next: function(){
-		return this.current == this.slides.length - 1 ? 0 : this.current + 1;
+		return this.current === this.slides.length - 1 ? 0 : this.current + 1;
 	},
 
 	_previous: function(){
@@ -133,7 +133,7 @@ jQuery.widget('ui.slideshow', {
 			slide = this.slides[i];
 			this._storeStyles( i );
 			if ( this.options.autoStyle ) slide.css( this._styles );
-			slide.css( 'display', i == this.current ? '' : 'none' );
+			slide.css( 'display', i === this.current ? '' : 'none' );
 		}
 	}
 
