@@ -13,10 +13,11 @@ jQuery.widget('ui.slideshow', {
 	},
 
 	_init: function(){
-		var el = this.subject = jQuery( this.element );
 		if ( this.options.autoStyle ){
-			if ( el.css('position') === 'static' ) el.css( 'position', 'relative' );
-			el.css( 'overflow', 'hidden' );
+			if ( this.element.css('position') === 'static' ) {
+				this.element.css( 'position', 'relative' );
+			}
+			this.element.css( 'overflow', 'hidden' );
 		}
 		this.transitioning = false;
 		this.setup();
@@ -24,7 +25,7 @@ jQuery.widget('ui.slideshow', {
 	},
 
 	setup: function(){
-		this.slides = this.subject.find( this.options.selector ).map(function( i, node ){
+		this.slides = this.element.find( this.options.selector ).map(function( i, node ){
 			return jQuery( node );
 		});
 		this.current = this.current || this.options.initialIndex;
@@ -35,14 +36,14 @@ jQuery.widget('ui.slideshow', {
 		var index = ( typeof what === 'number' ) ? what : this['_' + what]();
 		if ( this.transitioning || this.current === index ) return;
 
-		var opts = jQuery.extend( {}, options, this.options ),
+		var opts = jQuery.extend( {}, this.options, options ),
 			trans = this._parseTransition( opts.transition ),
 			next = this._prepNext( index ),
-			previous = this._prepPrevious( this.current );
+			prev = this._prepPrevious( this.current );
 			eventData = {
 				previous: {
-					element: previous,
-					index: previous.data( 'slideshow:index' )
+					element: prev,
+					index: prev.data( 'slideshow:index' )
 				},
 				next: {
 					element: next,
@@ -51,21 +52,30 @@ jQuery.widget('ui.slideshow', {
 			};
 
 		this.transitioning = true;
-		this._trigger( 'show', null, eventData );
 		this.current = index;
 
+		next.addClass( 'ui-slideshow-next' );
+		prev.addClass( 'ui-slideshow-previous' );
+		this.element.addClass( 'ui-slideshow-transitioning' );
+
 		trans.args.unshift({
-			previous: previous,
+			previous: prev,
 			next: next,
 			duration: opts.duration,
 			instance: this
 		});
+
+		this._trigger( 'show', null, eventData );
 		_transitions[trans.name].apply( _transitions, trans.args );
 
 		setTimeout(jQuery.proxy(function(){
-			previous.css('display', 'none');
-			this._trigger('showComplete', null, eventData);
 			this.transitioning = false;
+			next.removeClass( 'ui-slideshow-next' )
+				.addClass( 'ui-slideshow-current' );
+			prev.removeClass( 'ui-slideshow-previous' )
+				.css( 'display', 'none' );
+			this.element.removeClass( 'ui-slideshow-transitioning' );
+			this._trigger( 'showComplete', null, eventData );
 		}, this), opts.duration);
 
 		return this;
