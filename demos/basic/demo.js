@@ -1,4 +1,4 @@
 $('#slideshow').slideshow({
-	transition: 'blind(left)',
+	transition: 'slideFade(left)',
 	duration: 500
 });
