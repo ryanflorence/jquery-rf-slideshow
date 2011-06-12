@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery SlideShow</title>
+</head>
+<body>
+
+<style>
+
+  #slideshow {
+    width: 440px;
+    height: 420px;
+    text-align: center;
+  }
+  
+  #slideshow ul {
+    position: absolute;
+    z-index: 3;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  #slideshow ul li {
+    display: inline-block;
+    margin: 4px;
+  }
+
+  #slideshow a {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 6px 12px;
+  }
+</style>
+
+<div id=slideshow>
+  <div>
+    <img src="../img/one.jpg" id="one">
+    <img src="../img/two.jpg" id="two">
+    <img src="../img/three.jpg" id="three">
+    <img src="../img/four.jpg" id="four">
+    <img src="../img/five.jpg" id="five">
+  </div>
+  <ul>
+    <li><a href="#one">One</a></li>
+    <li><a href="#two">Two</a></li>
+    <li><a href="#three">Three</a></li>
+    <li><a href="#four">Four</a></li>
+    <li><a href="#five">Five</a></li>
+  </ul>
+</div>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.ui.core.js"></script>
+<script src="../js/jquery.ui.widget.js"></script>
+<script src="../../src/jquery.ui.slideshow.js"></script>
+<script src="../../src/transitions/slide.js"></script>
+<script src="../../src/transitions/blind.js"></script>
+<script src="../../src/transitions/push.js"></script>
+<script src="../../src/jquery.ui.panels.js"></script>
+<script src="demo.js"></script>
+
+</body>
+</html>
