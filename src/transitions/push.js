@@ -1,14 +1,16 @@
-jQuery.ui.slideshow.defineTransition( 'blind', function (params, dir, ease){
-	var prevAnimation = {},
-		nextAnimation = {},
-		prop = ( dir === 'left' || dir === 'right' ) ? 'left' : 'top',
-		invert = ( dir === 'left' || dir === 'up' ) ? 1 : -1;
+jQuery.ui.slideshow.defineTransition( 'push', function (params, direction, ease){
+	var nextAnimation = {},
+		prevAnimation = {},
+		css = { 'z-index': 2 },
+		prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top',
+		invert = ( direction === 'left' || direction === 'up' );
 
-	next[prop] = '0%';
-	prev[prop] = invert ? '-100%' : '100%';
-
+	nextAnimation[prop] = '0%';
+	css[prop] = invert ? '100%' : '-100%';
 	params.next
-		.css( prop, invert ? '100%', '-100%' )
-		.animate( prevAnimation, params.duration, ease );
-	params.previous.animate( nextAnimation, params.duration, ease );
+		.css( css )
+		.animate( nextAnimation, params.duration, ease );
+
+	prevAnimation[prop] = invert ? '-100%' : '100%';
+	params.previous.animate( prevAnimation, params.duration, ease );
 });
