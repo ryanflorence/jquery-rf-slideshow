@@ -41,22 +41,18 @@ jQuery.widget('ui.slideshow', {
 			next = this._prepNext( index ),
 			prev = this._prepPrevious( this.current );
 			eventData = {
-				previous: {
-					element: prev,
-					index: prev.data( 'slideshow:index' )
-				},
-				next: {
-					element: next,
-					index: index
-				}
+				previous: { element: prev, index: prev.data( 'slideshow:index' ) },
+				next: { element: next, index: index },
+				instance: this
 			};
 
 		this.transitioning = true;
 		this.current = index;
 
-		next.addClass( 'ui-slideshow-next' );
-		prev.addClass( 'ui-slideshow-previous' );
-		this.element.addClass( 'ui-slideshow-transitioning' );
+		next.addClass( this.widgetBaseClass + '-next' );
+		prev.addClass( this.widgetBaseClass + '-previous' )
+			.removeClass( this.widgetBaseClass + '-current');
+		this.element.addClass( this.widgetBaseClass + '-transitioning' );
 
 		trans.args.unshift({
 			previous: prev,
@@ -70,12 +66,12 @@ jQuery.widget('ui.slideshow', {
 
 		setTimeout(jQuery.proxy(function(){
 			this.transitioning = false;
-			next.removeClass( 'ui-slideshow-next' )
-				.addClass( 'ui-slideshow-current' );
-			prev.removeClass( 'ui-slideshow-previous' )
+			next.removeClass( this.widgetBaseClass + '-next' )
+				.addClass( this.widgetBaseClass + '-current' );
+			prev.removeClass( this.widgetBaseClass + '-previous' )
 				.css( 'display', 'none' );
-			this.element.removeClass( 'ui-slideshow-transitioning' );
-			this._trigger( 'showComplete', null, eventData );
+			this.element.removeClass( this.widgetBaseClass + '-transitioning' );
+			this._trigger( 'complete', null, eventData );
 		}, this), opts.duration);
 
 		return this;
@@ -128,10 +124,7 @@ jQuery.widget('ui.slideshow', {
 	_prepNext: function( i ){
 		var slide = this.slides[i],
 			style = slide.data( 'slideshow:style' ),
-			css = {
-				display: '',
-				'z-index': 0
-			};
+			css = { display: '', 'z-index': 0 };
 		if ( this.options.autoStyle ) jQuery.extend( css, this._styles );
 		return slide.attr( 'style', style ).css( css );
 	},
