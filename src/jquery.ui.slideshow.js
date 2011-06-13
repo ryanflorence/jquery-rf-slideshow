@@ -162,7 +162,7 @@ jQuery.ui.slideshow.defineTransitions = function( transitions ){
 	});
 };
 
-// create transitions
+// default transitions
 jQuery.ui.slideshow.defineTransitions({
 
 	none: function( params ){
@@ -171,8 +171,54 @@ jQuery.ui.slideshow.defineTransitions({
 
 	fade: function( params ){
 		params.previous.fadeOut( params.duration );
-	}
+	},
 
+	crossfade: function ( params ){
+		params.next.hide().fadeIn( params.duration );
+		params.previous.fadeOut( params.duration );
+	},
+
+	fadeThroughBackground: function ( params ){
+		var half = params.duration / 2;
+		params.next.hide();
+		params.previous.fadeOut( half );
+		setTimeout(function (){
+			params.next.fadeIn( half );
+		}, half);
+	},
+
+	blind: function( params, direction, fade, ease ){
+		var animation = {},
+			css = { 'z-index': 2 },
+			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top';
+		animation[prop] = '0%';
+		css[prop] = ( direction === 'left' || direction === 'up' ) ? '100%' : '-100%';
+		params.next.css( css ).animate( animation, params.duration, ease );
+		if (fade) this.fade.apply( this, arguments );
+	},
+
+	slide: function ( params, direction, fade, ease ){
+		var animation = {},
+			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top';
+		animation[prop] = ( direction === 'left' || direction === 'up' ) ? '-100%' : '100%';
+		if (fade) animation.opacity = 0;
+		params.previous.animate( animation, params.duration, ease );
+	},
+
+	push: function (params, direction, ease){
+		var nextAnimation = {},
+			prevAnimation = {},
+			css = { 'z-index': 2 },
+			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top',
+			invert = ( direction === 'left' || direction === 'up' );
+
+		nextAnimation[prop] = '0%';
+		css[prop] = invert ? '100%' : '-100%';
+		prevAnimation[prop] = invert ? '-100%' : '100%';
+
+		params.next.css( css ).animate( nextAnimation, params.duration, ease );
+		params.previous.animate( prevAnimation, params.duration, ease );
+	}
 });
 
 })(jQuery);
