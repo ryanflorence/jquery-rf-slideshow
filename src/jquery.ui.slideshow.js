@@ -149,6 +149,7 @@ jQuery.widget('ui.slideshow', {
 		for ( var i = 0, l = this.slides.length, slide; i < l; i++ ) {
 			slide = this.slides[i];
 			this._storeStyles( i );
+			slide.data( 'slideshow:index', i );
 			if ( this.options.autoStyle ) slide.css( this._styles );
 			slide.css( 'display', i === this.current ? '' : 'none' );
 		}
