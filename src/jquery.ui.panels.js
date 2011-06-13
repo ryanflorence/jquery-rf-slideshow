@@ -5,7 +5,13 @@ jQuery.widget( 'ui.panels', jQuery.ui.slideshow, {
 		selector: '> div > *',
 		navSelector: '> ul > li > a',
 		transition: 'push(#{direction})',
-		autoplay: false
+		getTransition: function( index ){
+			var direction = this.current < index ? 'left' : 'right',
+				transition = this.options.transition
+					.replace( /#\{direction\}/g, direction );
+			return { transition: transition };
+		},
+		autoPlay: false
 	}
 });
 
@@ -24,35 +30,28 @@ jQuery.extend(proto, {
 			.map(function( index, node ){
 				return jQuery( node ).bind( 'click.panels', function( event ){
 					event.preventDefault();
-					var t = self.calculateTransition( index );
-					self.show( index, t );
+					self.show( index, self.options.getTransition.call( self, index ) );
 				});
 			});
 
 		this.element.bind({
-			show: function( params ){
-				self.navs[params.next.index].addClass( 'ui-panels-next' );
+			'panelsshow': function( event, params ){
+				console.log(params)
+				self.navs[params.next.index].addClass( params.instance.widgetBaseClass + '-next' );
 				self.navs[params.previous.index]
-					.removeClass( 'ui-panels-current' )
-					.addClass( 'ui-panels-previous' );
+					.removeClass( params.instance.widgetBaseClass + '-current' )
+					.addClass( params.instance.widgetBaseClass + '-previous' );
 			},
 
-			showComplete: function( params ){
+			'panelscomplete': function( event, params ){
 				self.navs[params.next.index]
-					.removeClass( 'ui-panels-next' )
-					.addClass( 'ui-panels-current' );
+					.removeClass( params.instance.widgetBaseClass + '-next' )
+					.addClass( params.instance.widgetBaseClass + '-current' );
 				self.navs[params.previous.index]
-					.removeClass( 'ui-panels-previous' );
+					.removeClass( params.instance.widgetBaseClass + '-previous' );
 				
 			}
 		});
-	},
-
-	calculateTransition: function( index ){
-		var direction = this.current < index ? 'left' : 'right',
-			transition = this.options.transition
-				.replace( /#\{direction\}/g, direction );
-		return { transition: transition };
 	}
 
 });
