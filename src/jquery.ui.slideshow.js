@@ -94,7 +94,7 @@ jQuery.widget('ui.slideshow', {
 		return this;
 	},
 
-	// private, no backwards compatibily promised, use/extend at own risk
+	// internal & private, no backwards compatibily promised, use/extend at own risk
 	_parseTransition: function( transition ){
 		var matches = transition.match( /(.+)(\((.+)\))|(.+)/ );
 		return matches[4] ? {
@@ -103,7 +103,14 @@ jQuery.widget('ui.slideshow', {
 		} : {
 			name: matches[1],
 			args: jQuery.map( matches[3].split( ',' ), function( arg ){
-				return jQuery.trim( arg );
+				var trimmed = jQuery.trim( arg ),
+					parsed = parseFloat( trimmed );
+				if ( trimmed === 'true' ) return true;
+				if ( trimmed === 'false' ) return false;
+				if ( trimmed === '' || trimmed === 'undefined' ) return undefined;
+				if ( trimmed === 'null' ) return null;
+				if ( !isNaN( parsed ) ) return parsed;
+				return trimmed;
 			})
 		};
 	},
