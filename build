@@ -1,0 +1,3 @@
+uglifyjs src/jquery.ui.slideshow.js > dist.js
+gzip -c dist.js > dist.js.gz
+ls -l
