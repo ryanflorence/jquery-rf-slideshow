@@ -39,19 +39,19 @@ jQuery.extend(proto, {
 		this.element.bind({
 			// there's a good chance these event names kill kittens ;_;
 			'slideshownavshow': function( event, params ){
-				self.navs[params.next.index].addClass( params.instance.widgetBaseClass + '-next' );
+				self.navs[params.next.index].addClass( params.instance.widgetBaseClass + '-next-nav' );
 				self.navs[params.previous.index]
-					.removeClass( params.instance.widgetBaseClass + '-current' )
-					.addClass( params.instance.widgetBaseClass + '-previous' );
+					.removeClass( params.instance.widgetBaseClass + '-current-nav' )
+					.addClass( params.instance.widgetBaseClass + '-previous-nav' );
 			},
 
 			// another kitten just died T_T
 			'slideshownavcomplete': function( event, params ){
 				self.navs[params.next.index]
-					.removeClass( params.instance.widgetBaseClass + '-next' )
-					.addClass( params.instance.widgetBaseClass + '-current' );
+					.removeClass( params.instance.widgetBaseClass + '-next-nav' )
+					.addClass( params.instance.widgetBaseClass + '-current-nav' );
 				self.navs[params.previous.index]
-					.removeClass( params.instance.widgetBaseClass + '-previous' );
+					.removeClass( params.instance.widgetBaseClass + '-previous-nav' );
 				
 			}
 		});
