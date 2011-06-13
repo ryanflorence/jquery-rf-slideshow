@@ -7,7 +7,7 @@ jQuery.widget('ui.slideshow', {
 		selector: '> *',
 		initialIndex: 0,
 		autoStyle: true,
-		autoplay: true,
+		autoPlay: true,
 		delay: 3000,
 		duration: 400
 	},
@@ -21,7 +21,7 @@ jQuery.widget('ui.slideshow', {
 		}
 		this.transitioning = false;
 		this.setup();
-		if ( this.options.autoplay ) this.play();
+		if ( this.options.autoPlay ) this.play();
 	},
 
 	setup: function(){
