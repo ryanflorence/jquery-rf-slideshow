@@ -33,9 +33,17 @@ $.ui.slideshow.defineTransition( 'food', function( params, direction ){
 	});
 });
 
-var slideshow = $('#slideshow').slideshownav({
-	transition: 'food(#{direction})',
-	selector: '.slide',
-	duration: 1500,
-	autoPlay: false
-}).data('slideshow');
+
+var slideshow;
+
+$(function(){
+	$('html').removeClass('no-js').removeClass('not-ready');
+
+	slideshow = $('#slideshow').slideshownav({
+		transition: 'food(#{direction})',
+		selector: '.slide',
+		duration: 1500,
+		autoPlay: false
+	}).data('slideshow');
+	
+});

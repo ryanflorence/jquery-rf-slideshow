@@ -1,5 +1,6 @@
 body {
   background: #f0f0f0 url(../img/bg.jpg) center top;
+  margin-top: 25px;
 }
 
 #slideshow {
@@ -9,6 +10,7 @@ body {
   overflow: hidden;
   margin: auto;
   background: #fff;
+  position: relative;
   -webkit-border-radius: 12px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
@@ -20,6 +22,9 @@ body {
   /*display: none;*/
 }
 
+.not-ready .slide {
+	display: none;
+}
 
 .slide img {
   position: absolute;
@@ -125,7 +130,7 @@ body {
 	height: 80px;
 	border: none;
 	border-top: solid 1px #ccc;
-	top: 524px;
+	top: 523px;
   background-color: #dddddd;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#ffffff)); 
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff); 
@@ -136,6 +141,7 @@ body {
             filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#ffffff'); 
 
 }
+
 
 /* @group everything else */
 
