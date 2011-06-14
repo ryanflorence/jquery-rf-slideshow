@@ -28,7 +28,9 @@ jQuery.extend(proto, {
 
 		this.navs = this.element.find( this.options.navSelector )
 			.map(function( index, node ){
-				return jQuery( node ).bind( 'click.' + self.widgetEventPrefix, function( event ){
+				var el = jQuery( node );
+				if (self.current === index) el.addClass( self.widgetBaseClass + '-current-nav' );
+				return el.bind( 'click.' + self.widgetEventPrefix, function( event ){
 					event.preventDefault();
 					self.show( index, self.options.getTransition.call( self, index ) );
 				});
