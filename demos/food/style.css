@@ -1,0 +1,162 @@
+body {
+  background: #f0f0f0 url(../img/bg.jpg) center top;
+}
+
+#slideshow {
+  width: 800px;
+  border: solid 1px #ccc;
+  height: 628px;
+  overflow: hidden;
+  margin: auto;
+  background: #fff;
+  -webkit-border-radius: 12px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+
+.slide {
+  width: 100%;
+  height: 496px;
+  position: relative;
+  /*display: none;*/
+}
+
+
+.slide img {
+  position: absolute;
+}
+
+/* @group breakfast */
+
+#breakfast .one {
+	top: -222px;
+  left: 4px;
+  height: 432px;
+}
+
+#breakfast .two {
+  left: 191px;
+  height: 372px;
+  top: -1px;
+}
+
+#breakfast .three {
+  left: 353px;
+  top: 6px;
+}
+
+/* @end */
+
+/* @group burgers */
+
+#burgers .one {
+  left: 4px;
+  top: 87px;
+  height: 308px;
+}
+
+#burgers .three {
+  left: 540px;
+  height: 280px;
+  top: 109px;
+}
+
+#burgers .two {
+	top: 96px;
+  left: 283px;
+  height: 291px;
+}
+
+
+
+/* @end */
+
+/* @group chicken */
+
+#chicken .one {
+  left: 99px;
+  height: 286px;
+  top: -9px;
+}
+
+#chicken .two {
+  left: 433px;
+  top: -50px;
+  height: 346px;
+}
+
+#chicken .three {
+	top: -26px;
+  left: 178px;
+}
+
+
+
+/* @end */
+
+#slideshow ul {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  list-style: none;
+  text-align: center;
+}
+
+#slideshow li {
+  display: inline-block;
+}
+
+#slideshow li a {
+  cursor: pointer;
+  display: block;
+  margin: 0 20px;
+  width: 184px;
+}
+
+#slideshow li a.ui-slideshownav-current-nav,
+#slideshow li a.ui-slideshownav-next-nav {
+  background: url(../img/triangle.png) no-repeat top center;
+}
+
+.visual {
+	position: absolute;
+	width: 100%;
+	height: 80px;
+	border: none;
+	border-top: solid 1px #ccc;
+	top: 524px;
+  background-color: #dddddd;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#ffffff)); 
+  background-image: -webkit-linear-gradient(top, #dddddd, #ffffff); 
+  background-image:    -moz-linear-gradient(top, #dddddd, #ffffff); 
+  background-image:     -ms-linear-gradient(top, #dddddd, #ffffff); 
+  background-image:      -o-linear-gradient(top, #dddddd, #ffffff); 
+  background-image:         linear-gradient(top, #dddddd, #ffffff);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#ffffff'); 
+
+}
+
+/* @group everything else */
+
+body {
+  font-family: "helvetica";
+  color: #444;
+}
+
+.contained {
+  width: 800px;
+  margin: auto;
+}
+
+h1 {
+  font-family: Ultra;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-shadow: -1px 1px 0px #eee,
+  	-2px 2px 0px #ddd,
+  	-3px 3px 0px #ccc;
+}
+
+/* @end */
+
