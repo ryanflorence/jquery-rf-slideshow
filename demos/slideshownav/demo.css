@@ -1,0 +1,52 @@
+#slideshow {
+  width: 800px;
+  border: solid 1px #ccc;
+  height: 508px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+  -webkit-border-radius: 12px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+}
+
+#slides {
+  height: 100%;
+  margin-left: 284px;
+  position: relative;
+}
+
+#slideshow ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  list-style: none;
+  text-align: center;
+  width: 206px;
+  border-right: solid 1px #ccc;
+}
+
+#slideshow li {
+  margin-top: 34px;
+}
+
+#slideshow li a {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.copy {
+	width: 100%;
+}
+
+pre {
+  float: left;
+  margin: 0 1em 1em 0;
+}
+

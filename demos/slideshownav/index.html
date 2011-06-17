@@ -2,70 +2,74 @@
 <html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
-  <title>jQuery SlideShow</title>
+  <title>jQuery SlideShow - Navigation Demo</title>
+  <meta name=description content="A basic navigation slideshow using jQuery slideshow and slideshownav">
+  <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../site.css" type="text/css" charset="utf-8">
+
+  <!-- demo css -->
+  <link rel="stylesheet" href="demo.css" type="text/css" charset="utf-8">
 </head>
 <body>
 
-<style>
-
-  #slideshow {
-    font-family: "lucida grande", helvetica, arial;
-    font-size: 12px;
-    width: 440px;
-    height: 420px;
-    text-align: center;
-  }
-  
-  #slideshow ul {
-    position: absolute;
-    z-index: 3;
-    bottom: 10px;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  #slideshow ul li {
-    display: inline-block;
-    margin: 4px;
-  }
-
-  #slideshow a {
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 6px 12px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    border-radius: 6px;
-  }
-</style>
+<section class=group>
+<h1>You Want jQuery Slideshow</h1>
 
 <div id=slideshow>
-  <div>
-    <img src="../img/one.jpg" id="one">
-    <img src="../img/two.jpg" id="two">
-    <img src="../img/three.jpg" id="three">
-    <img src="../img/four.jpg" id="four">
-    <img src="../img/five.jpg" id="five">
+  <div id=slides>
+    <img data-left="266:10" data-right="266:15" class=two src=../img/burgers/2.png>
+    <img data-left="750:10" data-right="750:0" class=three src=../img/breakfast/3.png>
+    <img data-left="800:0" data-right="800:0" class=three src=../img/chicken/2.png>
   </div>
+
   <ul>
-    <li><a href="#one">One</a></li>
-    <li><a href="#two">Two</a></li>
-    <li><a href="#three">Three</a></li>
-    <li><a href="#four">Four</a></li>
-    <li><a href="#five">Five</a></li>
+    <li><a href="#burgers"><img src=../img/burgers/thumb.png alt=burgers></a></li>
+    <li><a href="#breakfast"><img src=../img/breakfast/thumb.png alt=breakfast></a></li>
+    <li><a href="#chicken"><img src=../img/chicken/thumb.png alt=chicken></a></li>
   </ul>
 </div>
 
-<script src="../js/jquery.js"></script>
+<div class=copy>
+  <h2>Slideshow Navigation Demo</h2>
+
+  <pre><code>$('#slideshow').slideshownav({
+  transition: 'push(#{direction})',
+  mode: 'vertical',
+  navSelector: '> ul > li > a',
+  duration: 400,
+  autoPlay: false
+});</code></pre>
+
+  <p>
+    The <code>slideshownav</code> widget extends <code>slideshow</code> by attaching click events to navigation elements.  Note the <code>#{direction}</code> transition "variable".  Depending upon the previous and next slide indices and the instance's <code>options.mode</code>, the direction becomes "left", "right", "up", or "down".
+  </p>
+
+
+</div>
+</section>
+
+<footer>
+  
+</footer>
+
+<!-- This is all included with script tags for dependency clarity.
+     You should concat/compress all your JS into one file and load
+     it async, or do something more fancy if you're in-the-know  -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<!-- jQuery UI -->
 <script src="../js/jquery.ui.core.js"></script>
 <script src="../js/jquery.ui.widget.js"></script>
+<!-- slideshow -->
 <script src="../../src/jquery.ui.slideshow.js"></script>
 <script src="../../src/jquery.ui.slideshownav.js"></script>
+
+<!-- this demo -->
 <script src="demo.js"></script>
 
+<!-- nuthin' important -->
+<script src="../js/site.js"></script>
 </body>
 </html>

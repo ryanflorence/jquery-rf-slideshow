@@ -1,3 +1,2 @@
-uglifyjs src/jquery.ui.slideshow.js > dist.js
-gzip -c dist.js > dist.js.gz
-ls -l
+uglifyjs src/jquery.ui.slideshow.js > website/content/static/js/jquery.ui.slideshow.js
+uglifyjs src/jquery.ui.slideshownav.js > website/content/static/js/jquery.ui.slideshownav.js

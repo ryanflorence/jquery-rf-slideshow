@@ -1,0 +1,119 @@
+.slideshow {
+  /* important stuff for slideshow */
+  width: 444px;
+  height: 507px;
+
+  /* just for the demo, not required */
+  padding: 10px;
+  float: left;
+  border: solid 1px #ccc;
+  background: #fff;
+  -webkit-border-radius: 12px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+
+.no-js .slideshow {
+  /* a sane no-js solution */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.no-js .slideshow img {
+  margin: 0;
+}
+
+/* nothing to do with implementing slideshow */
+.slideshow img {
+  background: #fff; /* makes pngs w/ transparency fades better looking */
+  margin: 10px;
+}
+
+body {
+  background: #f0f0f0 url(img/bg.jpg) center top;
+  margin: 0;
+  font-family: Merriweather;
+  line-height: 1.5;
+  color: #444;
+}
+
+.contained {
+  width: 800px;
+  margin: auto;
+}
+
+h1 {
+  clear: both;
+  font-family: Ultra;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-align: center;
+  font-size: 40px;
+  margin: 0;
+  padding-top: 10px;
+  text-shadow: -1px 1px 0px #eee,
+    -2px 2px 0px #ddd,
+    -3px 3px 0px #ccc;
+}
+
+code {
+  font-family: "Anonymous Pro";
+  color: #000;
+}
+
+p code {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.group {
+  width: 800px;
+  margin: auto;
+}
+
+.copy {
+  float: left;
+  margin-left: 10px;
+  width: 316px;
+}
+
+.copy > *:first-child {
+  margin-top: 0;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 50px;
+}
+
+header {
+  padding: 10px 0;
+}
+
+nav {
+  display: block;
+  width: 100%;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+nav li {
+  float: left;
+  list-style: none;
+  width: 25%;
+  text-align: center;
+}
+
+nav a {
+  display: block;
+  color: #aaa;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #000;
+}

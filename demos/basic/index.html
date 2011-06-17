@@ -2,30 +2,54 @@
 <html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
-  <title>jQuery SlideShow</title>
+  <title>jQuery SlideShow - Basic Demo</title>
+  <meta name=description content="The most basic example of using jQuery slideshow">
+  <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../site.css" type="text/css" charset="utf-8">
 </head>
 <body>
 
-<style>
-  #slideshow {
-    width: 440px;
-    height: 420px;
-  }
-</style>
+<section class=group>
+<h1>You Want jQuery Slideshow</h1>
 
-<div id=slideshow>
-  <img src="../img/one.jpg">
-  <img src="../img/two.jpg">
-  <img src="../img/three.jpg">
-  <img src="../img/four.jpg">
-  <img src="../img/five.jpg">
+<div id=slideshow1 class=slideshow>
+  <img src="../img/burgers/1.png">
+  <img src="../img/burgers/2.png">
+  <img src="../img/burgers/3.png">
 </div>
 
-<script src="../js/jquery.js"></script>
+<div class=copy>
+  <h2>Basic Demo</h2>
+
+  <pre><code>$('#slideshow1').slideshow();</code></pre>
+
+  <p>
+    This example uses the default settings.  The only important thing to do is define a height and width on the slideshow element because the slides get their CSS set to <code>position: absolute; left: 0; top: 0</code> so they can share the same space.
+  </p>
+
+  <p>
+    If you don't want slideshow messing with your element's styles you can set the <code>autoStyle</code> option to <code>false</code>.
+  </p>
+</div>
+</section>
+
+<!-- This is all included with script tags for dependency clarity.
+     You should concat/compress all your JS into one file and load
+     it async, or do something more fancy if you're in-the-know  -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<!-- jQuery UI -->
 <script src="../js/jquery.ui.core.js"></script>
 <script src="../js/jquery.ui.widget.js"></script>
+<!-- slideshow -->
 <script src="../../src/jquery.ui.slideshow.js"></script>
+
+<!-- this demo -->
 <script src="demo.js"></script>
 
+<!-- nuthin' important -->
+<script src="../js/site.js"></script>
 </body>
 </html>

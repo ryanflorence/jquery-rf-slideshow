@@ -1,30 +1,27 @@
 (function (jQuery){
 
+var _map = {
+	horizontal: { l: 'left', g: 'right'},
+	vertical:   { l: 'up',   g: 'down' }
+};
+
 jQuery.widget( 'ui.slideshownav', jQuery.ui.slideshow, {
 	options: {
 		selector: '> div > *',
 		navSelector: '> ul > li > a',
 		transition: 'push(#{direction})',
+		mode: 'horizontal',
 		getTransition: function( index ){
-			var direction = this.current < index ? 'left' : 'right',
-				transition = this.options.transition
-					.replace( /#\{direction\}/g, direction );
+			var direction = this.current < index ? _map[this.options.mode].l : _map[this.options.mode].g,
+				transition = this.options.transition.replace( /#\{direction\}/g, direction );
 			return { transition: transition };
 		},
 		autoPlay: false
-	}
-});
-
-// janky, widget ought to provide some way to call super
-// or some sort of method duck-punching
-var proto = jQuery.ui.slideshownav.prototype,
-	__setup = proto.setup;
-
-jQuery.extend(proto, {
+	},
 
 	setup: function(){
 		var self = this;
-		__setup.apply( this, arguments ); // apply super
+		jQuery.ui.slideshow.prototype.setup.apply( this, arguments ); // apply super
 
 		this.navs = this.element.find( this.options.navSelector )
 			.map(function( index, node ){
@@ -32,6 +29,7 @@ jQuery.extend(proto, {
 				if (self.current === index) el.addClass( self.widgetBaseClass + '-current-nav' );
 				return el.bind( 'click.' + self.widgetEventPrefix, function( event ){
 					event.preventDefault();
+					self._trigger('click');
 					self.show( index, self.options.getTransition.call( self, index ) );
 				});
 			});
