@@ -1,9 +1,9 @@
-jquery.ui.slideshow
+jquery.rf.slideshow
 -------------------
 
 **Unreleased!** A fully supported version 1.0 is nigh, yeah, even at the doors.
 
-Built upon the jQuery UI library, jquery.ui.slideshow is a super flexible, low-level slideshow.
+Built upon the jQuery UI library, jquery.rf.slideshow is a super flexible, low-level slideshow.
 
 Code is pretty much done, docs and demos forthcoming.
 
@@ -43,7 +43,7 @@ $('#el').slideshow({
 You can create your own transitions, which is what makes this script so awesome.
 
 ```javascript
-jQuery.ui.slideshow.defineTransition('slide', function (params, dir, ease){
+jQuery.rf.slideshow.defineTransition('slide', function (params, dir, ease){
   var animation = {},
       prop = (dir == 'left' || dir == 'right') ? 'left' : 'top';
   animation[prop] = (dir == 'left' || dir == 'up') ? '-100%' : '100%';

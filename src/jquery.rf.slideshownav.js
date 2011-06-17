@@ -5,7 +5,7 @@ var _map = {
 	vertical:   { l: 'up',   g: 'down' }
 };
 
-jQuery.widget( 'ui.slideshownav', jQuery.ui.slideshow, {
+jQuery.widget( 'rf.slideshownav', jQuery.rf.slideshow, {
 	options: {
 		selector: '> div > *',
 		navSelector: '> ul > li > a',
@@ -21,7 +21,7 @@ jQuery.widget( 'ui.slideshownav', jQuery.ui.slideshow, {
 
 	setup: function(){
 		var self = this;
-		jQuery.ui.slideshow.prototype.setup.apply( this, arguments ); // apply super
+		jQuery.rf.slideshow.prototype.setup.apply( this, arguments ); // apply super
 
 		this.navs = this.element.find( this.options.navSelector )
 			.map(function( index, node ){

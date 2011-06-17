@@ -2,7 +2,7 @@
 // slideshow ships with plenty of defaults
 // (push, slide, blind, fade, crossfade, etc.)
 // but you can define your own for awesome
-$.ui.slideshow.defineTransition( 'food', function( params, direction ){
+$.rf.slideshow.defineTransition( 'food', function( params, direction ){
   var half = params.duration / 2,
       opp = direction === 'right' ? -1 : 1,
       width = params.instance.element.width();

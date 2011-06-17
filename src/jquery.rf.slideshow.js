@@ -1,6 +1,6 @@
 (function ( jQuery ){
 
-jQuery.widget('ui.slideshow', {
+jQuery.widget('rf.slideshow', {
 
 	options: {
 		transition: 'fade',
@@ -153,18 +153,18 @@ jQuery.widget('ui.slideshow', {
 // transition definition "static" methods
 var _transitions = {};
 
-jQuery.ui.slideshow.defineTransition = function( name, transition ){
+jQuery.rf.slideshow.defineTransition = function( name, transition ){
 	_transitions[name] = transition;
 };
 
-jQuery.ui.slideshow.defineTransitions = function( transitions ){
+jQuery.rf.slideshow.defineTransitions = function( transitions ){
 	jQuery.each( transitions, function ( name, transition ){
-		jQuery.ui.slideshow.defineTransition( name, transition );
+		jQuery.rf.slideshow.defineTransition( name, transition );
 	});
 };
 
 // default transitions
-jQuery.ui.slideshow.defineTransitions({
+jQuery.rf.slideshow.defineTransitions({
 
 	none: function( params ){
 		params.previous.css( 'display', 'none' );

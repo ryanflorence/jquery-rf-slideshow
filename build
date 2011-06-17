@@ -1,2 +1,2 @@
-uglifyjs src/jquery.ui.slideshow.js > website/content/static/js/jquery.ui.slideshow.js
-uglifyjs src/jquery.ui.slideshownav.js > website/content/static/js/jquery.ui.slideshownav.js
+uglifyjs src/jquery.rf.slideshow.js > website/content/static/js/jquery.rf.slideshow.js
+uglifyjs src/jquery.rf.slideshownav.js > website/content/static/js/jquery.rf.slideshownav.js
