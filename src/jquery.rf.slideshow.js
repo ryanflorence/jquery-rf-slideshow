@@ -9,7 +9,8 @@ jQuery.widget('rf.slideshow', {
 		autoStyle: true,
 		autoPlay: true,
 		delay: 3000,
-		duration: 400
+		duration: 400,
+		resetTimerOnShow: true
 	},
 
 	_init: function(){
@@ -20,6 +21,8 @@ jQuery.widget('rf.slideshow', {
 			this.element.css( 'overflow', 'hidden' );
 		}
 		this.transitioning = false;
+		this.playing = false;
+
 		this.setup();
 		if ( this.options.autoPlay ) this.play();
 	},
@@ -35,6 +38,8 @@ jQuery.widget('rf.slideshow', {
 	show: function( what, options ){
 		var index = ( typeof what === 'number' ) ? what : this['_' + what]();
 		if ( this.transitioning || this.current === index ) return;
+
+		if (this.playing && this.options.resetTimerOnShow) this.stop().play();
 
 		var opts = jQuery.extend( {}, this.options, options ),
 			trans = this._parseTransition( opts.transition ),
@@ -78,15 +83,17 @@ jQuery.widget('rf.slideshow', {
 	},
 
 	play: function( now ){
-		this.timer = setInterval(jQuery.proxy(function(){
+		this._timer = setInterval(jQuery.proxy(function(){
 			this.show( 'next' );
 		}, this), this.options.delay);
 		if ( now ) this.show( 'next' );
+		this.playing = true;
 		return this;
 	},
 
 	stop: function(){
-		clearInterval( this.timer );
+		clearInterval( this._timer );
+		this.playing = false;
 		return this;
 	},
 
@@ -174,7 +181,7 @@ jQuery.rf.slideshow.defineTransitions({
 		params.previous.fadeOut( params.duration );
 	},
 
-	crossfade: function ( params ){
+	crossFade: function ( params ){
 		params.next.hide().fadeIn( params.duration );
 		params.previous.fadeOut( params.duration );
 	},
@@ -220,6 +227,7 @@ jQuery.rf.slideshow.defineTransitions({
 		params.next.css( css ).animate( nextAnimation, params.duration, ease );
 		params.previous.animate( prevAnimation, params.duration, ease );
 	}
+
 });
 
 })(jQuery);

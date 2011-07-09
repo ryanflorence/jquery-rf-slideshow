@@ -1,6 +1,6 @@
 // crazy awesome custom transition
 // slideshow ships with plenty of defaults
-// (push, slide, blind, fade, crossfade, etc.)
+// (push, slide, blind, fade, crossFade, etc.)
 // but you can define your own for awesome
 $.rf.slideshow.defineTransition( 'food', function( params, direction ){
   var half = params.duration / 2,
@@ -36,8 +36,6 @@ $.rf.slideshow.defineTransition( 'food', function( params, direction ){
     }, params.duration + 15);
   });
 });
-
-
 
 var slideshow;
 

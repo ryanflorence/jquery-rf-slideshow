@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery SlideShow - Kitchen Sink Demo</title>
+  <meta name=description content="The most basic example of using jQuery slideshow">
+  <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../site.css" type="text/css" charset="utf-8">
+  <link rel="stylesheet" href="demo.css" type="text/css" charset="utf-8">
+</head>
+<body>
+
+<header class=contained>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../basic/index.html">Basic Demo</a></li>
+      <li><a href="../slideshownav/index.html">Navigation Demo</a></li>
+      <li><a href="../slideshownav/index.html">Kitchen Sink Demo</a></li>
+      <li><a href="../docs/index.html">Docs</a></li>
+      <li><a href="https://github.com/rpflorence/jquery.rf.slideshow">Github</a></li>
+    </ul>
+  </nav>
+
+  <h1>You Want jQuery Slideshow</h1>
+</header>
+
+<section class=contained>
+
+<div id=slideshow class=slideshow>
+  <img src="../img/burgers/1.png">
+  <img src="../img/burgers/2.png">
+  <img src="../img/burgers/3.png">
+</div>
+
+<div class=copy>
+  <h2>Kitchen Sink Demo</h2>
+  <ul>
+    <li><select id=transition>
+      <option value="blind(left, true, swing)">blind(left, true, swing)</option>
+      <option value="custom">custom</option>
+      <option value="blind(right)">blind(right)</option>
+      <option value="push(up, linear)">push(up, linear)</option>
+      <option value="slide(down)">slide(down)</option>
+      <option value="slide(up, true)">slide(up, true)</option>
+      <option value="fade">fade</option>
+      <option value="crossFade">crossFade</option>
+      <option value="fadeThroughBackground">fadeThroughBackground</option>
+    </select></li>
+    <li><button id=showNext>show( 'next' )</button></li>
+    <li><button id=showPrevious>show( 'previous' )</button></li>
+    <li><button id=showIndex>show( 2 )</button></li>
+    <li><button id=showWithOptions>show( 0, options )</button></li>
+    <li><button id=play>play( true )</button></li>
+    <li><button id=stop>stop()</button></li>
+  </ul>
+
+  <p>
+    This example shows a few of the methods and transition for the slideshow.  Check the demo.js file to see how it's all done.  It's a really easy widget to control.
+  </p>
+</div>
+</section>
+
+<!-- This is all included with script tags for dependency clarity.
+     You should concat/compress all your JS into one file and load
+     it async, or do something more fancy if you're in-the-know  -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<!-- jQuery UI -->
+<script src="../js/jquery.ui.core.js"></script>
+<script src="../js/jquery.ui.widget.js"></script>
+<!-- slideshow -->
+<script src="../../src/jquery.rf.slideshow.js"></script>
+
+<!-- this demo -->
+<script src="demo.js"></script>
+
+<!-- nuthin' important -->
+<script src="../js/site.js"></script>
+</body>
+</html>

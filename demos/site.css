@@ -99,19 +99,21 @@ nav ul {
   margin: 0;
   padding: 0;
   width: 100%;
+  text-align: center;
 }
 
 nav li {
-  float: left;
+  display: inline-block;
   list-style: none;
-  width: 25%;
   text-align: center;
+  font-size: 14px;
 }
 
 nav a {
   display: block;
   color: #aaa;
   text-decoration: none;
+  padding: 2px 8px;
 }
 
 nav a:hover {

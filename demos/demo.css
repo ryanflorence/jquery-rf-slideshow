@@ -114,8 +114,8 @@
   width: 184px;
 }
 
-#slideshow li a.ui-slideshownav-current-nav,
-#slideshow li a.ui-slideshownav-next-nav {
+#slideshow li a.rf-slideshownav-current-nav,
+#slideshow li a.rf-slideshownav-next-nav {
   background: url(img/triangle.png) no-repeat top center;
 }
 

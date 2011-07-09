@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv=Content-type content="text/html; charset=utf-8">
+  <title>jQuery Slideshow API Documentation</title>
+  <link rel="stylesheet" href="styles.css" media="screen">
+</head>
+<body>
+<div id=content>
+
+<div id=header>
+  <input type=search id=terms>
+  <ul id=links>
+    <li><a href="https://github.com/rpflorence/jquery.rf.slideshow">github repository</a></li>
+  </ul>
+</div>
+
+<ul id=nav>
+  <li><h2><a href="#jquery.rf.slideshow">jQuery.rf.slideshow</a></h2>
+    <ul>
+      <li><a href="#slideshow.cheatsheet">Cheat Sheet</a></li>
+      <li><a href="#jquery.fn.slideshow"><b>jQuery.fn method:</b> slideshow</a>
+        <ul>
+          <li><a href="#slideshow.data.slideshow"><b>element data:</b> slideshow</a></li>
+        </ul>
+      </li>
+      <li><a href="#slideshow.constructor"><b>constructor:</b> jQuery.rf.slideshow</a>
+        <ul>
+          <li><a href="#slideshow.defineTransition"><b>function:</b>  defineTransition</a></li>
+          <li><a href="#slideshow.method.show"><b>method:</b> show</a></li>
+          <li><a href="#slideshow.method.play"><b>method:</b> play</a></li>
+          <li><a href="#slideshow.method.stop"><b>method:</b> stop</a></li>
+          <li><a href="#slideshow.method.setup"><b>method:</b> setup</a></li>
+
+          <li><a href="#slideshow.property.element"><b>property:</b> element</a></li>
+          <li><a href="#slideshow.property.slides"><b>property:</b> slides</a></li>
+          <li><a href="#slideshow.property.current"><b>property:</b> current</a></li>
+          <li><a href="#slideshow.property.playing"><b>property:</b> playing</a></li>
+          <li><a href="#slideshow.property.transitioning"><b>property:</b> transitioning</a></li>
+
+          <li><a href="#slideshow.event.show"><b>event:</b> show</a></li>
+          <li><a href="#slideshow.event.showcomplete"><b>event:</b> showcomplete</a></li>
+
+          <li><a href="#slideshow.css.next"><b>css:</b> next</a></li>
+          <li><a href="#slideshow.css.previous"><b>css:</b> previous</a></li>
+          <li><a href="#slideshow.css.current"><b>css:</b> current</a></li>
+          <li><a href="#slideshow.css.transitioning"><b>css:</b> transitioning</a></li>
+
+          <li><a href="#slideshow.css.transitioning"><b>css:</b> transitioning</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><h2><a href="#jquery.rf.slideshownav">jQuery.rf.slideshownav</a></h2>
+    <ul>
+      <li><a href="#jquery.fn.slideshownav"><b>jQuery.fn method:</b> slideshownav</a>
+        <ul>
+          <li><a href="#slideshownav.data.slideshownav"><b>element data:</b> slideshownav</a></li>
+        </ul>
+      </li>
+      <li><a href="#slideshownav.constructor"><b>constructor:</b> jQuery.rf.slideshownav</a>
+        <ul>
+          <li><a href="#slideshownav.event.click"><b>event:</b> click</a></li>
+          <li><a href="#slideshownav.css.current-nav"><b>css:</b> current-nav</a></li>
+          <li><a href="#slideshownav.css.next-nav"><b>css:</b> next-nav</a></li>
+          <li><a href="#slideshownav.css.previous-nav"><b>css:</b> previous-nav</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<div id=docs>
+<h2 id=about-jquery-slideshow><a href="#about-jquery-slideshow">About jQuery SlideShow</a></h2>
+<h1>jQuery Slideshow</h1>
+<p>The last slideshow you'll ever need.</p>
+<p>This documentation is released under the <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons - Attribution-NonCommercial-ShareAlike license.</a></p>
+
+<h2 id="slideshow.cheatsheet"><a href="#slideshow.cheatsheet">Cheat Sheet</a></h2>
+<h3>HTML</h3>
+<pre><code>&lt;!-- styling the height and width is important for some transitions --&gt;
+&lt;div id=&quot;slideshow&quot; style=&quot;width: 400px; height: 200px&quot;&gt;
+  &lt;img src=&quot;../img/one.jpg&quot;&gt; &lt;!-- can use any element you want, not just images --&gt;
+  &lt;img src=&quot;../img/two.jpg&quot;&gt;
+  &lt;img src=&quot;../img/three.jpg&quot;&gt;
+  &lt;img src=&quot;../img/four.jpg&quot;&gt;
+  &lt;img src=&quot;../img/five.jpg&quot;&gt;
+&lt;/div&gt;</code></pre>
+
+<h3>CSS</h3>
+<p>Generally you want your slides to be 100% width and height of the slideshow, but you can do whatever you want.</p>
+
+<h3>JavaScript</h3>
+
+<pre><code>var $el = $('#slideshow');
+$el.slideshow({
+  duration: 400,
+  delay: 3000,
+  selector: '> img',
+  transition: 'push(up)',
+  autoPlay: true,
+  show: function (params){
+    var nextIndex = params.next.index;
+    if (nextIndex > 2) {
+      // do something awesome when the slide is after the third slide.
+    }
+  },
+  showcomplete: function (params){
+    // do something awesome when a transition finishes
+  }
+});
+
+// get the slideshow object if you want it
+var slideshow = $el.data('slideshow');
+
+// show the third slide
+$el.slideshow( 'show', 2 ); // Element API
+slideshow.show(2); // object API
+
+// show the next slide
+slideshow.show('next');
+
+// pause and play
+slideshow.stop();
+slideshow.play();
+</code></pre>
+
+<h3>Custom transitions</h3>
+<p>You can create your own transitions :D</p>
+<pre><code>jQuery.rf.slideshow.defineTransition('slide', function (params, dir, ease){
+  var animation = {},
+      prop = (dir == 'left' || dir == 'right') ? 'left' : 'top';
+  animation[prop] = (dir == 'left' || dir == 'up') ? '-100%' : '100%';
+  params.previous.animate(animation, params.duration, ease);
+});</code></pre>
+<p>The name of a transition works like a function, but it's just a string.  You can allow for any number of arguments when creating a transition.</p>
+
+<p>For instance, with the slide example, the acceptable transition options could be:</p>
+
+<pre><code>'slide(left)'
+'slide(right)'
+'slide(up)'
+'slide(down)'
+'slide(left, linear)'
+'slide(left, bounce)'
+// in other words
+'slide([direction], [easing])'
+</code></pre>
+
+
+<section id=jquery.rf.slideshow>
+<h1><a href="#jquery.rf.slideshow">jQuery.rf.slideshow</a></h1>
+
+
+
+
+
+<h2 id=jquery.fn.slideshow><a href="#jquery.fn.slideshow"><b>jQuery.fn method:</b> slideshow</a></h2>
+<p>jQuery UI constructor/element bridge that creates a new slideshow instance on the set of matched elements and stores it on the <code>slideshow</code> key of the element' data.  All instance methods and properties are available through the jQuery wrapper API from the jQuery widget factory bridge.</p>
+<h3>Signatures</h3>
+<pre class=sig><code>.slideshow(options)
+.slideshow(method, [methodArg [, methodArgN]])
+.slideshow(property [, value])
+</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>options</code> (<b>object</b>) - Key value pairs of options, see <a href="#slideshow.constructor">jQuery.rf.slideshow</a> for more information.</li>
+</ol>
+<ol>
+  <li><code>method</code> (<b>string</b>) - The method name as a string to call on the slideshow instance</li>
+  <li><code>methodArg</code> (<b>mixed</b>) - The argument(s) to send to the method</li>
+</ol>
+<ol>
+  <li><code>property</code> (<b>string</b>) - The property name to get or set from the slideshow instance (will get if <code>value</code> parameter is omitted)</li>
+  <li><code>value</code> (<b>mixed</b>) - The value to set the property to on the slideshow instance</li>
+</ol>
+<h3>Returns</h3>
+<p><b>Object</b> - A jQuery object</p>
+<h3>Examples</h3>
+<pre><code>var el = $('#slideshowElement')
+
+// create an instance of slideshow with a few options
+el.slideshow({
+  selector: 'img',
+  delay: 5000,
+  duration: 500,
+  transition: 'fadeThroughBackground'
+});
+
+// call a method through the jQuery UI bridge API
+el.slideshow('show', 2); // shows the third slide
+
+// get the instance out of the elements data
+var slideshow = el.data('slideshow');
+
+// call methods directly on the instance
+slideshow.show(2);</code></pre>
+
+
+<h2 id=slideshow.constructor><a href="#slideshow.constructor"><b>slideshow constructor:</b> jQuery.rf.slideshow</a></h2>
+<p>The slideshow constructor function created by jQuery UI widget factory.</p>
+<h3>Signature</h3>
+<pre class=sig><code>new jQuery.rf.slideshow(options, node)</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>options</code> (<b>object</b>) - An object map of key value pairs
+    <ul>
+      <li><code>transition</code> (<b>string</b>, default <code>'fade'</code> ) - The default transition to use.  Slideshow ships with: push, slide, blind, fade, crossFade, fadeThroughBackground, and none.  <a href="#slideshow.defineTransition">Read more about transitions</a></li>
+      <li><code>selector</code> (<b>css selector string</b>, default <code>'> *'</code>) - A CSS selector that defines which children elements are the slides.  The default selects immediate children.</li>
+      <li><code>initialIndex</code> (<b>number</b>, default <code>0</code>) - Which slide to show upon on initialization by index.</li>
+      <li><code>autoPlay</code> (<b>boolean</b>, default <code>false</code>) - Automatically cycles the slideshow without having to call the <code>play</code> method.</li>
+      <li><code>delay</code> (<b>number</b>, default: <code>3000</code>) - The time in milliseconds a slide is displayed.</li>
+      <li><code>duration</code> (<b>number</b>, default: <code>400</code>) - The time in milliseconds a transition animates.</li>
+      <li><code>resetTimerOnShow</code> (<b>boolean</b>, default: <code>true</code>) - If true, when <code>show</code> is called while the slideshow is playing, the delay timer is reset.  If false, calling <code>show</code> does not interrupt the timer and you will get two transitions (or more) for one delay cycle.</li>
+      <li><code>autoStyle</code> (<b>boolean</b>, default: <code>true</code>) - Automatically sets the style properties on your elements that most transitions need: <code>{ left: 0, top: 0, position: 'absolute' }</code> for slides and position <code>relative</code> for the parent element if position is static.</li>
+    </ul>
+  </li>
+  <li><code>node</code> (<b>element</b>) - A DOM element (not a jQuery wrapped collection)</li>
+</ol>
+<h3>Returns</h3>
+<p><b>Object</b> A slideshow instance object.</p>
+<h3>Examples</h3>
+<pre><code>// generally, jQuery widgets don't do it like this :P
+var slideshow = new jQuery.rf.slideshow({
+  transition: 'push(left, swing)',
+  selector: '.slide'
+}, $('#slideshow)[0]);
+
+// if you want an object to work with this is more jQuery-esque...
+var slideshow = $('#slideshow').slideshow({
+  transition: 'push(left, swing)',
+  selector: '.slide'
+}).data('slideshow');
+</code></pre>
+
+
+<h2 id=slideshow.defineTransition><a href="#slideshow.defineTransition"><b>slideshow function:</b> defineTransition</a></h2>
+<p>Defines a slideshow transition, the muscle behind slideshow.  I encourage you to read the source where the out-of-the-box transitions are defined.  Mastering this function will allow you to flippin' sweet slideshows.</p>
+<h3>Signature</h3>
+<pre class=sig><code>jQuery.rf.slideshow.defineTransition( name, transition )</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>name</code> (<b>string</b>) - The name of the transition.</li>
+  <li><code>transition</code> (<b>function</b>) - The function called when the slideshow uses the transition.
+    <p><b>Signature</b></p>
+    <pre class=sig><code>function ( params [, argN] )</code></pre>
+    <p><b>Arguments</b></p>
+    <ol>
+      <li><code>params</code> (<b>object</b>) - Information about the transition and slideshow instance:
+        <ul>
+          <li><code>previous</code> (<b>$element</b>) - The previous slide, already wrapped with jQuery.</li>
+          <li><code>next</code> (<b>$element</b>) - The next slide, already wrapped with jQuery.</li>
+          <li><code>duration</code> (<b>number</b>) - The duration of the transition.</li>
+          <li><code>instance</code> (<b>object</b>) - The slideshow instance, for convenience.</li>
+        </ul>
+      </li>
+      <li><code>argN</code> (<b>mixed</b>) - Transition names are actually quasi-functions that take parameters that get passed through as arguments to the transition function.  See examples for details.</li>
+    </ol>
+  </li>
+</ol>
+<h3>Returns</h3>
+<p><b>undefined</b></p>
+<h3>Examples</h3>
+<pre><code>// fade is about simplest transition
+jQuery.rf.slideshow.defineTransition('fade', function( params ){
+  // the previous slide is on top with z-index 1, and the next slide has z-index 0
+  // ... so we can simply fade the previous slide out and use the params.duration
+  params.previous.fadeOut( params.duration );
+});
+
+// The slide transition is a bit more complex
+jQuery.rf.slideshow.defineTransition('slide', function ( params, direction, fade, ease ){
+  // You can pass arguments to a transition (so cool)
+  // direction, fade, and ease all come from the transition option the user defines
+  var animation = {}, // animation options to build up
+      // figure out which property to animate based on the direction
+      prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top';
+  // set the animation property and value
+  animation[prop] = ( direction === 'left' || direction === 'up' ) ? '-100%' : '100%';
+  // check the fade argument and add opacity to the animation
+  if (fade) animation.opacity = 0;
+  // perform the animation and slide the previous element out
+  params.previous.animate( animation, params.duration, ease );
+});
+
+// and the usage:
+$('#el').slideshow({
+  transition: 'slide(left, true, linear)' // here's where the arguments come from
+});
+
+</code></pre>
+<h3>Notes</h3>
+<p>As you can see from the examples, transition strings get parsed like functions and pass the values into the transition. The values true, false, null, undefined and '' values will be converted to their primitive types.</p>
+
+<h2 id=slideshow.method.show><a href="#slideshow.method.show"><b>slideshow method:</b> show</a></h2>
+<p>Transitions from the current slide to another.</p>
+<h3>Signature</h3>
+<pre class=sig><code>slideshow.show( what, options )
+$element.slideshow( 'show', what, options )</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>what</code> (<b>mixed</b>) - Accepts the strings <code>'next'</code> and <code>'previous'</code> or the index of the slide you want to show, ie: <code>2</code></li>
+  <li><code>options</code> (<b>object</b>) - Can override the instance options <code>duration</code> and <code>transition</code> for just this transition.</li>
+</ol>
+<h3>Returns</h3>
+<p><b>Object</b> Returns the slideshow object or the jQuery collection.</p>
+<h3>Examples</h3>
+<pre><code>
+var $element = $('#slideshow').slideshow(); // create slideshow, store element
+var slideshow = $element.data('slideshow'); // get slideshow instance
+
+// show 3rd slide
+$element.slideshow( 'show', 2 ); // $element API
+slideshow.show( 2 ); // object API
+
+// show next slide
+$element.slideshow( 'show', 'next' ); // $element API
+slideshow.show( 'next' ); // object API
+
+// show previous slide with options
+$element.slideshow( 'show', 'next', {
+  transition: 'push(right)',
+  duration: 1000
+}); // $element API
+
+slideshow.show( 'next', {
+  transition: 'push(right)',
+  duration: 1000
+}); // object API
+</code></pre>
+
+
+<h2 id=slideshow.method.play><a href="#slideshow.method.play"><b>slideshow method:</b> play</a></h2>
+<p>Transitions slides on an interval defined in <code>options.delay</code>.</p>
+<h3>Signature</h3>
+<pre class=sig><code>slideshow.play()
+$element.slideshow( 'play' )</code></pre>
+<h3>Returns</h3>
+<p><b>Object</b> Returns the slideshow object or the jQuery collection.</p>
+<h3>Examples</h3>
+<pre><code>
+var $element = $('#slideshow').slideshow(); // create slideshow, store element
+var slideshow = $element.data('slideshow'); // get slideshow instance
+
+$element.slideshow( 'play' ); // $element API
+slideshow.play(); // object API
+</code></pre>
+
+
+
+<h2 id=slideshow.method.stop><a href="#slideshow.method.stop"><b>slideshow method:</b> stop</a></h2>
+<p>Stops the slideshow when cycling.</p>
+<h3>Signature</h3>
+<pre class=sig><code>slideshow.stop()
+$element.slideshow( 'stop' )</code></pre>
+<h3>Returns</h3>
+<p><b>Object</b> Returns the slideshow object or the jQuery collection.</p>
+<h3>Examples</h3>
+<pre><code>
+var $element = $('#slideshow').slideshow(); // create slideshow, store element
+var slideshow = $element.data('slideshow'); // get slideshow instance
+
+$element.slideshow( 'stop' ); // $element API
+slideshow.stop(); // object API
+</code></pre>
+
+
+
+<h2 id=slideshow.method.setup><a href="#slideshow.method.setup"><b>slideshow method:</b> setup</a></h2>
+<p>Sets up the slideshow, call this if you dynamically add / remove slides.</p>
+<h3>Signature</h3>
+<pre class=sig><code>slideshow.setup()
+$element.slideshow( 'setup' )</code></pre>
+<h3>Returns</h3>
+<p><b>Object</b> Returns the slideshow object or the jQuery collection.</p>
+<h3>Examples</h3>
+<pre><code>var $element = $('#slideshow').slideshow(); // create slideshow, store element
+var slideshow = $element.data('slideshow'); // get slideshow instance
+
+$element.slideshow( 'setup' ); // $element API
+slideshow.setup(); // object API
+</code></pre>
+
+
+
+
+<h2 id=slideshow.property.element><a href="#slideshow.property.element"><b>slideshow property:</b> element</a></h2>
+<p><b>$element</b> - The jQuery wrapped slideshow element</p>
+<pre class=sig><code>slideshow.element
+$element.slideshow( 'element' )</code></pre>
+
+<h2 id=slideshow.property.slides><a href="#slideshow.property.slides"><b>slideshow property:</b> slides</a></h2>
+<p><b>Array</b> - The jQuery wrapped slide elements.</p>
+<pre class=sig><code>slideshow.slides
+$element.slideshow( 'slides' )</code></pre>
+
+
+<h2 id=slideshow.property.current><a href="#slideshow.property.current"><b>slideshow property:</b> current</a></h2>
+<p><b>Number</b> - The index of the current slide.</p>
+<pre class=sig><code>slideshow.current
+$element.slideshow( 'current' )</code></pre>
+
+
+<h2 id=slideshow.property.playing><a href="#slideshow.property.playing"><b>slideshow property:</b> playing</a></h2>
+<p><b>Boolean</b> - True if playing.</p>
+<pre class=sig><code>slideshow.playing
+$element.slideshow( 'playing' )</code></pre>
+
+
+<h2 id=slideshow.property.transitioning><a href="#slideshow.property.transitioning"><b>slideshow property:</b> transitioning</a></h2>
+<p><b>Boolean</b> - True if in the middle of a transition.</p>
+<pre class=sig><code>slideshow.transitioning
+$element.slideshow( 'transitioning' )</code></pre>
+
+
+<h2 id=slideshow.event.show><a href="#slideshow.event.show"><b>slideshow event:</b> show</a></h2>
+<p>Fires when the slideshow starts a transition.</p>
+<h3>Signature</h3>
+<pre class=sig><code>function( event, eventData )</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>event</code> (<b>null</b>) - I'm honestly not sure why this exists for widget custom events :\</li>
+  <li><code>eventData</code> (<b>object</b>) - Data about the event
+    <ul>
+      <li><code>next</code> (<b>object</b>) - Information about the next element.
+        <ul>
+          <li><code>element</code> (<b>$element</b>) - The next element, wrapped by jQuery.</li>
+          <li><code>index</code> (<b>number</b>) - The index of the next slide.</li>
+        </ul>
+      </li>
+      <li><code>previous</code> (<b>object</b>) - Information about the previous element.
+        <ul>
+          <li><code>element</code> (<b>$element</b>) - The previous element, wrapped by jQuery.</li>
+          <li><code>index</code> (<b>number</b>) - The index of the previous slide.</li>
+        </ul>
+      </li>
+      <li><code>instance</code> (<b>object</b>) - The slideshow instance.</li>
+    </ul>
+  </li>
+</ol>
+<h3>Examples</h3>
+<pre><code>// element API, can pass in as an option
+var $el = $('#slideshow').slideshow({
+  show: function ( event, eventData ){
+    // do something with eventData
+    if (event)
+  }
+});
+
+// or can add it later
+var slideshow = $el.data('slideshow'); // get the instance
+slideshow.bind('slideshowshow', function(){
+  // do something
+});</code></pre>
+
+<h2 id=slideshow.event.show><a href="#slideshow.event.show"><b>slideshow event:</b> showcomplete</a></h2>
+<p>Fires when a slideshow transition ends.</p>
+<h3>Signature</h3>
+<pre class=sig><code>function( event, eventData )</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>event</code> (<b>null</b>) - I'm honestly not sure why this exists for widget custom events :\</li>
+  <li><code>eventData</code> (<b>object</b>) - Data about the event
+    <ul>
+      <li><code>next</code> (<b>object</b>) - Information about the next element.
+        <ul>
+          <li><code>element</code> (<b>$element</b>) - The next element, wrapped by jQuery.</li>
+          <li><code>index</code> (<b>number</b>) - The index of the next slide.</li>
+        </ul>
+      </li>
+      <li><code>previous</code> (<b>object</b>) - Information about the previous element.
+        <ul>
+          <li><code>element</code> (<b>$element</b>) - The previous element, wrapped by jQuery.</li>
+          <li><code>index</code> (<b>number</b>) - The index of the previous slide.</li>
+        </ul>
+      </li>
+      <li><code>instance</code> (<b>object</b>) - The slideshow instance.</li>
+    </ul>
+  </li>
+</ol>
+<h3>Examples</h3>
+<pre><code>// element API, can pass in as an option
+var $el = $('#slideshow').slideshow({
+  showcomplete: function ( event, eventData ){
+    // do something with eventData
+    if (event)
+  }
+});
+
+// or can add it later
+var slideshow = $el.data('slideshow'); // get the instance
+slideshow.bind('slideshowshowcomplete', function(){
+  // do something
+});</code></pre>
+
+
+<h2 id=slideshow.css.next><a href="#slideshow.css.next"><b>slideshow css:</b> next</a></h2>
+<p>During a transition, the next element gets the CSS class <code>.slideshow-next</code>.</p>
+
+<h2 id=slideshow.css.previous><a href="#slideshow.css.previous"><b>slideshow css:</b> previous</a></h2>
+<p>During a transition, the previous element gets the CSS class <code>.slideshow-previous</code>.</p>
+
+<h2 id=slideshow.css.current><a href="#slideshow.css.current"><b>slideshow css:</b> current</a></h2>
+<p>The current slide gets the css class <code>.slideshow-current</code>.</p>
+
+<h2 id=slideshow.css.transitioning><a href="#slideshow.css.transitioning"><b>slideshow css:</b> transitioning</a></h2>
+<p>During a transition, the slideshow element gets the css class <code>.slideshow-transitioning</code>.</p>
+
+</section>
+
+<section id=jquery.rf.slideshownav>
+<h1><a href="#jquery.rf.slideshownav">jQuery.rf.slideshownav</a></h1>
+
+<h2 id=jquery.fn.slideshownav><a href="#jquery.fn.slideshownav"><b>jQuery.fn method:</b> slideshownav</a></h2>
+<p>jQuery UI constructor/element bridge that creates a new slideshow instance on the set of matched elements and stores it on the <code>slideshow</code> key of the element' data.  All instance methods and properties are available through the jQuery wrapper API from the jQuery widget factory bridge.</p>
+<h3>Signatures</h3>
+<pre class=sig><code>.slideshownav(options)
+.slideshownav(method, [methodArg [, methodArgN]])
+.slideshownav(property [, value])
+</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>options</code> (<b>object</b>) - Key value pairs of options, see <a href="#slideshow.constructor">jQuery.rf.slideshow</a> for more information.</li>
+</ol>
+<ol>
+  <li><code>method</code> (<b>string</b>) - The method name as a string to call on the slideshow instance</li>
+  <li><code>methodArg</code> (<b>mixed</b>) - The argument(s) to send to the method</li>
+</ol>
+<ol>
+  <li><code>property</code> (<b>string</b>) - The property name to get or set from the slideshow instance (will get if <code>value</code> parameter is omitted)</li>
+  <li><code>value</code> (<b>mixed</b>) - The value to set the property to on the slideshow instance</li>
+</ol>
+<h3>Returns</h3>
+<p><b>Object</b> - A jQuery object</p>
+<h3>Examples</h3>
+<pre><code>var el = $('#slideshowElement')
+
+// create an instance of slideshownav with a few options
+el.slideshow({
+  navSelector: '.nav',
+  mode: 'vertical'
+});
+
+// call a method through the jQuery UI bridge API
+el.slideshownav('show', 2); // shows the third slide
+
+// get the instance out of the elements data
+var slideshow = el.data('slideshownav');
+
+// call methods directly on the instance
+slideshow.show(2);</code></pre>
+
+<h2 id=slideshownav.constructor><a href="#slideshownav.constructor"><b>slideshownav constructor:</b> jQuery.rf.slideshownav</a></h2>
+<p>The slideshownav constructor function created by jQuery UI widget factory.</p>
+<h3>Signature</h3>
+<pre class=sig><code>new jQuery.rf.slideshownav(options. node)</code></pre>
+<h3>Arguments</h3>
+<ol>
+  <li><code>options</code> (<b>object</b>) - An object map of key value pairs
+    <ul>
+      <li>All the options of <a href="#slideshow.constructor">jQuery.rf.slideshow</a> plus the following:</li>
+      <li><code>navSelector</code> (<b>string</b>, default <code>'> ul > li > a'</code> ) - A CSS selector that defines which elements represent the navigation for the slides.</li>
+      <li><code>mode</code> (<b>string</b>, default <code>horizontal</code>) - Which direction the navigation items are relative to each other.  Relevant because slideshownav dynamically figures out if a transition should be 'up' or 'down' and 'right' or 'left'.</li>
+      <li><code>transition</code> (<b>string</b>, default <code>'push(#{direction})'</code>) - the <code>#{direction}</code> "variable" will be replaced with 'up', 'down', 'left', or 'right' depending upon the mode and previous/next slides. Do read the notes in this section.</li>
+    </ul>
+  </li>
+  <li><code>node</code> (<b>element</b>) - A DOM element (not a jQuery wrapped collection)</li>
+</ol>
+<h3>Returns</h3>
+<p><b>Object</b> A slideshow instance object.</p>
+<h3>Examples</h3>
+<pre><code>// generally, jQuery widgets don't do it like this :P
+var slideshow = new jQuery.rf.slideshownav({
+  transition: 'push(#{direction}, swing)', // direction will be dynamically changed to 'left' or 'right'
+  mode: 'horizontal',
+  navSelector: '.nav'
+}, $('#slideshow)[0]);
+
+// if you want an object to work with this is more jQuery-esque...
+var slideshow = $('#slideshow').slideshow({
+  transition: 'push(#{direction}, swing)',
+  mode: 'horizontal',
+  navSelector: '.nav'
+}).data('slideshow');
+</code></pre>
+<h3>Notes</h3>
+<p>When a transition starts, slideshownav looks at the mode and then does some math with the previous and next slide indices and then passes that knowledge into the transition arguments.  For example: if a slideshow's mode is horizontal and the transition is <code>'push(#{direction})'</code>, and it's moving from the first slide to the second slide, it will replace <code>#{direction}</code> with 'left', and the transition becomes <code>push(left)</code>.</p>
+
+<h2 id=slideshownav.event.click><a href="#slideshownav.event.click"><b>slideshownav event:</b> click</a></h2>
+<p>Triggered when a nav element is clicked.</p>
+
+
+<h2 id=slideshownav.css.current-nav><a href="#slideshownav.css.current-nav"><b>slideshownav css:</b> current-nav</a></h2>
+<p>A CSS class applied to the current navigation element.</p>
+
+<h2 id=slideshownav.css.next-nav><a href="#slideshownav.css.next-nav"><b>slideshownav css:</b> next-nav</a></h2>
+<p>During a transition, the next navigation element gets this CSS class</p>
+
+<h2 id=slideshownav.css.previous-nav><a href="#slideshownav.css.previous-nav"><b>slideshownav css:</b> previous-nav</a></h2>
+<p>During a transition, the previous element gets this CSS class.</p>
+
+
+</section>
+
+</div><!-- /docs -->
+</div><!-- /content -->
+
+<script src="js/snack.js"></script>
+<script src="js/hijs.js"></script>
+<script src="js/docs.js"></script>
+</body>
+</html>
