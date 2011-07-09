@@ -239,4 +239,6 @@ jQuery.rf.slideshow.defineTransitions({
 
 });
 
+jQuery.rf.slideshow.v = '1.0.0pre';
+
 })(jQuery);

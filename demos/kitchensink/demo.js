@@ -8,10 +8,10 @@ var slideshow = $('#slideshow').slideshow({
   delay: 3000, // ms between transitions when autoPlay is true
   duration: 400, // duration of a transition
   show: function(event, params){
-    console.log( params );
+    //console.log( params );
   },
   showComplete: function(event, params){
-    
+    //console.log(params);
   }
 }).data('slideshow'); // get the instance out of the element data
 

@@ -82,8 +82,10 @@ p code {
 footer {
   clear: both;
   text-align: center;
-  padding: 20px;
-  padding-bottom: 50px;
+  padding-top: 55px;
+  padding-bottom: 100px;
+  color: #ccc;
+  font-size: 11px;
 }
 
 header {
@@ -111,12 +113,15 @@ nav li {
 
 nav a {
   display: block;
-  color: #aaa;
-  text-decoration: none;
   padding: 2px 8px;
 }
 
-nav a:hover {
+a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+a:hover {
   color: #000;
 }
 

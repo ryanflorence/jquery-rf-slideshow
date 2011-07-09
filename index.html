@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" class="no-js not-ready">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery SlideShow By Ryan Florence</title>
+  <meta name=description content="You want jQuery slideshow.  The best and most flexible slideshow for teh $blingz">
+  <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="demos/site.css" type="text/css" charset="utf-8">
+  
+  <!-- demo styles -->
+  <link rel="stylesheet" href="demos/demo.css" type="text/css" charset="utf-8">
+</head>
+<body>
+
+<header class=contained>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="demos/basic/index.html">Basic Demo</a></li>
+      <li><a href="demos/slideshownav/index.html">Navigation Demo</a></li>
+      <li><a href="demos/kitchensink/index.html">Kitchen Sink Demo</a></li>
+      <li><a href="docs/index.html">Docs</a></li>
+      <li><a href="https://github.com/rpflorence/jquery.rf.slideshow">Github</a></li>
+      <li><a class=download href="jquery-slideshow.tgz">Download</a></li>
+    </ul>
+  </nav>
+
+  <h1>You Want jQuery Slideshow</h1>
+</header>
+
+<div id=slideshow>
+  <div id=slides>
+    <div class=slide id=burgers>
+      <img data-left="0:0" data-right="0:30" class=one src=demos/img/burgers/3.png>
+      <img data-left="266:10" data-right="266:15" class=two src=demos/img/burgers/2.png>
+      <img data-left="532:20" data-right="532:0" class=three src=demos/img/burgers/1.png>
+    </div>
+    <div class=slide id=breakfast>
+      <img data-left="0:0" data-right="0:0" class=one src=demos/img/breakfast/1.png>
+      <img data-left="375:5" data-right="375:0" class=two src=demos/img/breakfast/2.png>
+      <img data-left="750:10" data-right="750:0" class=three src=demos/img/breakfast/3.png>
+    </div>
+    <div class=slide id=chicken>
+      <img data-left="100:0" data-right="100:0" class=one src=demos/img/chicken/1.png>
+      <img data-left="400:0" data-right="400:0" class=two src=demos/img/chicken/3.png>
+      <img data-left="800:0" data-right="800:0" class=three src=demos/img/chicken/2.png>
+    </div>
+  </div>
+  <div class=visual></div>
+  <ul>
+    <li><a href="#burgers"><img src=demos/img/burgers/thumb.png alt=burgers></a></li>
+    <li><a href="#breakfast"><img src=demos/img/breakfast/thumb.png alt=breakfast></a></li>
+    <li><a href="#chicken"><img src=demos/img/chicken/thumb.png alt=chicken></a></li>
+  </ul>
+</div>
+
+<footer>
+  Created by <a href="http://ryanflorence.com">Ryan Florence</a>, follow him on <a href="http://twitter.com/ryanflorence">Twitter</a> and <a href="https:/github.com/rpflorence">Github</a>
+</footer>
+
+
+<!-- This is all included with script tags for dependency clarity.
+     You should concat/compress all your JS into one file and load
+     it async, or do something more fancy if you're in-the-know  -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<!-- jQuery UI -->
+<script src="demos/js/jquery.ui.core.js"></script>
+<script src="demos/js/jquery.ui.widget.js"></script>
+<!-- slideshow -->
+<script src="src/jquery.rf.slideshow.js"></script>
+<script src="src/jquery.rf.slideshownav.js"></script>
+
+<!-- this demo -->
+<script src="demos/demo.js"></script>
+
+<!-- nuthin' important -->
+<script src="demos/js/site.js"></script>
+
+
+</body>
+</html>
