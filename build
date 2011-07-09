@@ -1,2 +1,11 @@
-uglifyjs src/jquery.rf.slideshow.js > website/content/static/js/jquery.rf.slideshow.js
-uglifyjs src/jquery.rf.slideshownav.js > website/content/static/js/jquery.rf.slideshownav.js
+ender build jquery.ui.widget --noop --output jquery.ui
+
+mv jquery.ui.min.js dist/jquery.ui.min.js
+
+uglifyjs src/jquery.rf.slideshow.js > dist/jquery.rf.slideshow.min.js
+uglifyjs src/jquery.rf.slideshownav.js > dist/jquery.rf.slideshownav.min.js
+
+tar -czvf jquery-slideshow.tgz dist/
+
+rm jquery.ui.js
+rm -rf node_modules

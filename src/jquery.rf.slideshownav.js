@@ -1,3 +1,11 @@
+/*!
+ * jQuery Slideshow Nav
+ *
+ * Copyright 2011, Ryan Florence
+ * MIT Style License
+ * http://ryanflorence.com/jquery-slideshow/
+ *
+*/
 (function (jQuery){
 
 var _map = {
