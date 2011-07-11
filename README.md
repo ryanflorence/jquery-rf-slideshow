@@ -1,13 +1,17 @@
 jquery.rf.slideshow
 -------------------
 
-**Unreleased!** A fully supported version 1.0 is nigh, yeah, even at the doors.
-
 Built upon the jQuery UI library, jquery.rf.slideshow is a super flexible, low-level slideshow.
 
-Code is pretty much done, docs and demos forthcoming.
-
 Copyright (c) Ryan Florence, MIT Style License
+
+Demos / Docs
+------------
+
+* [Online Demos](http://ryanflorence.com/jquery-slideshow/).
+* [Online Docs](http://ryanflorence.com/jquery-slideshow/docs/).
+
+That website is just this repository, so you can clone the repository and open `index.html` in your browser as well.
 
 Quick Look
 ----------
@@ -19,7 +23,7 @@ First you need some simple markup
 ```html
 <!-- styling the height and width is important for some transitions -->
 <div id="slideshow" style="width: 400px; height: 200px">
-  <img src="../img/one.jpg">
+  <img src="../img/one.jpg"> <!-- can have any kind of element, not just images -->
   <img src="../img/two.jpg">
   <img src="../img/three.jpg">
   <img src="../img/four.jpg">
@@ -53,7 +57,7 @@ jQuery.rf.slideshow.defineTransition('slide', function (params, dir, ease){
 
 The name of a transition works like a function, but it's just a string.  You can allow for any number of arguments when creating a transition.
 
-For instance, with the slide example:
+Here are some example values for the transition option when using `slide`.
 
 ```javascript
 'slide(left)'
@@ -65,8 +69,6 @@ For instance, with the slide example:
 // in other words
 'slide([direction], [easing])'
 ```
-
-Before this is released there will be a plethora of transitions to choose from.
 
 ### Methods
 
