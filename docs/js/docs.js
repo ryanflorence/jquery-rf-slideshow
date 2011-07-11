@@ -1,3 +1,13 @@
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-6960372-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+})();
+
 var $ = snack.wrap
 
 var searchInput = snack.publisher({
@@ -43,10 +53,17 @@ function init (){
     , terms = $('#terms')
     , items = $('#nav > li li')
     , headers = $('#nav h2')
+    , links = $('#nav a')
     , searcher = Object.create(searchInput).init(terms[0])
     
   searcher.subscribe('keyup', search)
+  searcher.subscribe('keyup', function (value){
+    _gaq.push(['_trackEvent', 'search', value])
+  })
   terms.attach('click', searcher.listener.fire)
+  links.attach('click', function (event){
+    _gaq.push(['_trackPageview', event.target.href])
+  })
 
   function search (value){
     var matched = []
@@ -81,3 +98,5 @@ function init (){
 }
 
 snack.ready(init)
+
+
