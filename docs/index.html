@@ -39,7 +39,7 @@
           <li><a href="#slideshow.property.transitioning"><b>property:</b> transitioning</a></li>
 
           <li><a href="#slideshow.event.show"><b>event:</b> show</a></li>
-          <li><a href="#slideshow.event.showcomplete"><b>event:</b> showcomplete</a></li>
+          <li><a href="#slideshow.event.complete"><b>event:</b> complete</a></li>
 
           <li><a href="#slideshow.css.next"><b>css:</b> next</a></li>
           <li><a href="#slideshow.css.previous"><b>css:</b> previous</a></li>
@@ -117,7 +117,7 @@ $el.slideshow({
       // do something awesome when the slide is after the third slide.
     }
   },
-  showcomplete: function (params){
+  complete: function (params){
     // do something awesome when a transition finishes
   }
 });
@@ -465,7 +465,7 @@ slideshow.bind('slideshowshow', function(){
   // do something
 });</code></pre>
 
-<h2 id=slideshow.event.show><a href="#slideshow.event.show"><b>slideshow event:</b> showcomplete</a></h2>
+<h2 id=slideshow.event.show><a href="#slideshow.event.show"><b>slideshow event:</b> complete</a></h2>
 <p>Fires when a slideshow transition ends.</p>
 <h3>Signature</h3>
 <pre class=sig><code>function( event, eventData )</code></pre>
@@ -493,7 +493,7 @@ slideshow.bind('slideshowshow', function(){
 <h3>Examples</h3>
 <pre><code>// element API, can pass in as an option
 var $el = $('#slideshow').slideshow({
-  showcomplete: function ( event, eventData ){
+  complete: function ( event, eventData ){
     // do something with eventData
     if (event)
   }
@@ -501,7 +501,7 @@ var $el = $('#slideshow').slideshow({
 
 // or can add it later
 var slideshow = $el.data('slideshow'); // get the instance
-slideshow.bind('slideshowshowcomplete', function(){
+slideshow.bind('slideshowcomplete', function(){
   // do something
 });</code></pre>
 
