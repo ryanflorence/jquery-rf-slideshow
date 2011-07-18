@@ -179,6 +179,11 @@ jQuery.rf.slideshow.defineTransitions = function( transitions ){
 	});
 };
 
+// references instead of conditionals
+var propMap = { left: 'left', right: 'left', up: 'top', down: 'top' },
+	valueMap = { left: '100%', up: '100%', right: '-100%', down: '-100%' },
+	invertValueMap = { left: '-100%', up: '-100%', right: '100%', down: '100%' };
+
 // default transitions
 jQuery.rf.slideshow.defineTransitions({
 
@@ -207,17 +212,18 @@ jQuery.rf.slideshow.defineTransitions({
 	blind: function( params, direction, fade, ease ){
 		var animation = {},
 			css = { 'z-index': 2 },
-			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top';
+			prop = propMap[direction];
+
 		animation[prop] = '0%';
-		css[prop] = ( direction === 'left' || direction === 'up' ) ? '100%' : '-100%';
+		css[prop] = valueMap[direction];
 		params.next.css( css ).animate( animation, params.duration, ease );
 		if (fade) this.fade.apply( this, arguments );
 	},
 
 	slide: function ( params, direction, fade, ease ){
 		var animation = {},
-			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top';
-		animation[prop] = ( direction === 'left' || direction === 'up' ) ? '-100%' : '100%';
+			prop = propMap[direction];
+		animation[prop] = invertValueMap[direction];
 		if (fade) animation.opacity = 0;
 		params.previous.animate( animation, params.duration, ease );
 	},
@@ -226,12 +232,12 @@ jQuery.rf.slideshow.defineTransitions({
 		var nextAnimation = {},
 			prevAnimation = {},
 			css = { 'z-index': 2 },
-			prop = ( direction === 'left' || direction === 'right' ) ? 'left' : 'top',
+			prop = propMap[direction],
 			invert = ( direction === 'left' || direction === 'up' );
 
 		nextAnimation[prop] = '0%';
-		css[prop] = invert ? '100%' : '-100%';
-		prevAnimation[prop] = invert ? '-100%' : '100%';
+		css[prop] = valueMap[direction];
+		prevAnimation[prop] = invertValueMap[direction];
 
 		params.next.css( css ).animate( nextAnimation, params.duration, ease );
 		params.previous.animate( prevAnimation, params.duration, ease );
