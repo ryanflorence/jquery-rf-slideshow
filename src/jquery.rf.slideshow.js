@@ -244,6 +244,6 @@ jQuery.rf.slideshow.defineTransitions({
 
 });
 
-jQuery.rf.slideshow.v = '1.0.0';
+jQuery.rf.slideshow.v = '1.1.0';
 
 })(jQuery);
