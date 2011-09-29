@@ -37,16 +37,16 @@ $.rf.slideshow.defineTransition( 'food', function( params, direction ){
   });
 });
 
-var slideshow;
-
 $(function(){
 
   var el = $('#slideshow');
 
   // create a slideshownav instance and then pull the instance
-  // out of the element data
-  slideshow = el.slideshownav({
+  // out of the element data, assigned to window so you can play
+  // with it in the console
+  window.slideshow = el.slideshownav({
     transition: 'food(left)',
+    navTransition: 'food(#{direction})',
     selector: '.slide',
     duration: 1500,
     delay: 4000,
@@ -58,8 +58,6 @@ $(function(){
     // manage the state of the slideshow object
     // (after click, quit autoplay)
     slideshow.stop();
-    // dynamically figure out the direction
-    slideshow.options.transition = 'food(#{direction})';
   });
 
 });

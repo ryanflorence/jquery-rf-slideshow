@@ -17,19 +17,19 @@ jQuery.widget( 'rf.slideshownav', jQuery.rf.slideshow, {
 	options: {
 		selector: '> div > *',
 		navSelector: '> ul > li > a',
-		transition: 'push(#{direction})',
+		navTransition: 'push(#{direction})',
 		mode: 'horizontal',
 		getTransition: function( index ){
 			var direction = this.current < index ? _map[this.options.mode]['<'] : _map[this.options.mode]['>'],
-				transition = this.options.transition.replace( /#\{direction\}/g, direction );
+				transition = this.options.navTransition.replace( /#\{direction\}/g, direction );
 			return { transition: transition };
 		},
 		autoPlay: false
 	},
 
-	setup: function(){
+	_init: function(){
 		var self = this;
-		jQuery.rf.slideshow.prototype.setup.apply( this, arguments ); // apply super
+		jQuery.rf.slideshow.prototype._init.apply( this, arguments ); // apply super
 
 		this.navs = this.element.find( this.options.navSelector )
 			.map(function( index, node ){

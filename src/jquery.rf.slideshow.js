@@ -22,7 +22,7 @@ jQuery.widget('rf.slideshow', {
 		resetTimerOnShow: true
 	},
 
-	_init: function(){
+	_create: function(){
 		if ( this.options.autoStyle ){
 			if ( this.element.css('position') === 'static' ) {
 				this.element.css( 'position', 'relative' );
@@ -32,11 +32,10 @@ jQuery.widget('rf.slideshow', {
 		this.transitioning = false;
 		this.playing = false;
 
-		this.setup();
 		if ( this.options.autoPlay ) this.play();
 	},
 
-	setup: function(){
+	_init: function(){
 		this.slides = this.element.find( this.options.selector ).map(function( i, node ){
 			return jQuery( node );
 		});

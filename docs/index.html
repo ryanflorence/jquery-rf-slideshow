@@ -30,7 +30,6 @@
           <li><a href="#slideshow.method.show"><b>method:</b> show</a></li>
           <li><a href="#slideshow.method.play"><b>method:</b> play</a></li>
           <li><a href="#slideshow.method.stop"><b>method:</b> stop</a></li>
-          <li><a href="#slideshow.method.setup"><b>method:</b> setup</a></li>
 
           <li><a href="#slideshow.property.element"><b>property:</b> element</a></li>
           <li><a href="#slideshow.property.slides"><b>property:</b> slides</a></li>
@@ -378,24 +377,6 @@ slideshow.stop(); // object API
 
 
 
-<h2 id=slideshow.method.setup><a href="#slideshow.method.setup"><b>slideshow method:</b> setup</a></h2>
-<p>Sets up the slideshow, call this if you dynamically add / remove slides.</p>
-<h3>Signature</h3>
-<pre class=sig><code>slideshow.setup()
-$element.slideshow( 'setup' )</code></pre>
-<h3>Returns</h3>
-<p><b>Object</b> Returns the slideshow object or the jQuery collection.</p>
-<h3>Examples</h3>
-<pre><code>var $element = $('#slideshow').slideshow(); // create slideshow, store element
-var slideshow = $element.data('slideshow'); // get slideshow instance
-
-$element.slideshow( 'setup' ); // $element API
-slideshow.setup(); // object API
-</code></pre>
-
-
-
-
 <h2 id=slideshow.property.element><a href="#slideshow.property.element"><b>slideshow property:</b> element</a></h2>
 <p><b>$element</b> - The jQuery wrapped slideshow element</p>
 <pre class=sig><code>slideshow.element
@@ -573,7 +554,7 @@ slideshow.show(2);</code></pre>
       <li>All the options of <a href="#slideshow.constructor">jQuery.rf.slideshow</a> plus the following:</li>
       <li><code>navSelector</code> (<b>string</b>, default <code>'> ul > li > a'</code> ) - A CSS selector that defines which elements represent the navigation for the slides.</li>
       <li><code>mode</code> (<b>string</b>, default <code>horizontal</code>) - Which direction the navigation items are relative to each other.  Relevant because slideshownav dynamically figures out if a transition should be 'up' or 'down' and 'right' or 'left'.</li>
-      <li><code>transition</code> (<b>string</b>, default <code>'push(#{direction})'</code>) - the <code>#{direction}</code> "variable" will be replaced with 'up', 'down', 'left', or 'right' depending upon the mode and previous/next slides. Do read the notes in this section.</li>
+      <li><code>navTransition</code> (<b>string</b>, default <code>'push(#{direction})'</code>) - Called when navigation items are clicked.  The <code>#{direction}</code> "variable" will be replaced with 'up', 'down', 'left', or 'right' depending upon the mode and previous/next slides. Do read the notes in this section.</li>
     </ul>
   </li>
   <li><code>node</code> (<b>element</b>) - A DOM element (not a jQuery wrapped collection)</li>
@@ -583,14 +564,14 @@ slideshow.show(2);</code></pre>
 <h3>Examples</h3>
 <pre><code>// generally, jQuery widgets don't do it like this :P
 var slideshow = new jQuery.rf.slideshownav({
-  transition: 'push(#{direction}, swing)', // direction will be dynamically changed to 'left' or 'right'
+  navTransition: 'push(#{direction}, swing)', // direction will be dynamically changed to 'left' or 'right'
   mode: 'horizontal',
   navSelector: '.nav'
 }, $('#slideshow)[0]);
 
 // if you want an object to work with this is more jQuery-esque...
 var slideshow = $('#slideshow').slideshow({
-  transition: 'push(#{direction}, swing)',
+  navTransition: 'push(#{direction}, swing)',
   mode: 'horizontal',
   navSelector: '.nav'
 }).data('slideshow');
