@@ -52,7 +52,7 @@ jQuery.widget('rf.slideshow', {
 		var opts = jQuery.extend( {}, this.options, options ),
 			trans = this._parseTransition( opts.transition ),
 			next = this._prepNext( index ),
-			prev = this._prepPrevious( this.current );
+			prev = this._prepPrevious( this.current ),
 			eventData = {
 				previous: { element: prev, index: prev.data( 'slideshow:index' ) },
 				next: { element: next, index: index },
